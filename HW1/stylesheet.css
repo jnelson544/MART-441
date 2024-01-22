@@ -26,7 +26,7 @@ text-align: center;
   header {
     padding: var(--metric-box-spacing);
     background-color: hsl(200deg 70% 95%);
-    opacity: 50%;
+    opacity: 75%;
     font-size: 1.4em;
     
     
