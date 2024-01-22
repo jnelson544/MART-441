@@ -26,7 +26,7 @@ text-align: center;
   header {
     padding: var(--metric-box-spacing);
     background-color: hsl(200deg 70% 95%);
-    opacity: 60%;
+    opacity: 50%;
     font-size: 1.4em;
     
     
@@ -71,17 +71,17 @@ button {
   
   .leftbox {
     background-color: hwb(308 78% 4%);
-    opacity: 75%;
+    opacity: 60%;
     
   }
   .rightbox {
     background-color: hwb(191 68% 5%);
-    opacity: 75%;
+    opacity: 60%;
   }
 
   .bottombox{
     background-color:hwb(98 67% 2%);
-    opacity: 75%;
+    opacity: 60%;
   }
   
   .leftbox,
