@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adventure Story</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <script src="story.js"></script>
+    </head>
+
+<body>
+    <div class="refresh"><button onclick="location.reload();">Restart Story</button></div>
+    <div class="primary">
+        <h1>Lost in the Woods</h1>
+        <div class="secondary">
+            <div id="question">
+                <div id="name"> Adventurer, </div> while out hiking with your family, you come across a rare flower. 
+                You stop to take some photos while your family continues on through the brush. Distracted 
+                by your floural discover, you loose track of your family. Now you must try and 
+                find your family, but be careful because it is getting dark. Do you head out to find them?
+            </div>
+        </div>
+    </div>
+    <div class="button-space">
+               
+        <br>
+        <input type="text" size="30" id="option1" value="Type Yes or No">
+        <button id="btnSubmit" onclick="selectOption1();">Click to continue</button>
+
+        <input type="text" size="30" id="option2" value="Type Footprints or Trail" style="display:none">
+        <button id="btnSubmit2" onclick="selectOption2();"  style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option3" value="Enter Yes or No"  style="display:none">
+        <button id="btnSubmit3" onclick="selectOption3();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option4" value="Type Mountain or Trail"  style="display:none">
+        <button id="btnSubmit4" onclick="selectOption4();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option5" value="Type Birds or Movement"  style="display:none">
+        <button id="btnSubmit5" onclick="selectOption5();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option6" value="Type Yes or No"  style="display:none">
+        <button id="btnSubmit6" onclick="selectOption6();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option7" value="Type something"  style="display:none">
+        <button id="btnSubmit7" onclick="selectOption7();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option8" value="Enter Yes or No"  style="display:none">
+        <button id="btnSubmit8" onclick="selectOption8();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option9" value="Type Help or No"  style="display:none">
+        <button id="btnSubmit9" onclick="selectOption9();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option10" value="Type Follow Map or Leave"  style="display:none">
+        <button id="btnSubmit10" onclick="selectOption10();" style="display:none">Click to continue</button>
+
+        <input type="text" size="30" id="option11" value="Type Follow Map or Leave"  style="display:none">
+        <button id="btnSubmit11" onclick="selectOption11();" style="display:none">Click to continue</button>
+    </div>  
+    <div id="turnCountDisplay" class="turn-count-display"></div>
+</body>
+
+</html>
