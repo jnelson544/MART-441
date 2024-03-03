@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- I started out searching for images of social justice over the internet, but that did not seem to work. I could not find images that told the "story" that i wanted to tell, so I had AI generate them. 
+I provide vague prompts about diversity, equality, and inclusion and this is what CoPilot created. I also had some issues with my code so I had ChatGPT help me with debugging. This was not easy because
+some of the code suggestions were code that I already had implemented correctly. Also it would start to go round and round with the same answer a few times. It would get stuck in an answer loop so I 
+would be unable to get an answer and would have to try to change up my question. Luckily, I was able to make the sit work properly. -->
+<html>
+<head>
+    <title>ViewFinder</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </link>
+    
+</head>
+<body>
+    <!-- <img src="image6.jpg" alt="social-justice"> -->
+    <div id="imageDetails">
+        <img id="displayedImage" src="" alt="Displayed Image">
+        <div class="row-info">
+            <p id="title"></p>
+            <p id="description"></p>
+            <p id="author"></p>
+            <p id="year"></p>
+        </div>
+    </div>
+    <button id="btnSubmit" onclick="displayRandomImage();">Next Image</button>
+
+    <script defer>
+        // Create an empty array. We will add to this later
+        var myViewFinderArray = new Array();
+
+        // This is the main ViewFinder class
+        class ViewFinder {
+            constructor(title, image, description, author, year) {
+                this.title = title;
+                this.image = image;
+                this.description = description;
+                this.author = author;
+                this.year = year;
+            }
+
+            toString() {
+                return `Title: ${this.title}`;
+            }
+
+            getImage() {
+                return this.image;
+            }
+
+            getTitle() {
+                return this.title
+            }
+
+            getDescription() {
+                return this.description;
+            }
+
+            getAuthor() {
+                return this.author;
+            }
+
+            getYear() {
+                return this.year;
+            }
+        }
+
+        // This function is called in the body of the HTML page
+        // so that the objects are created and added to the array myViewFinderArray
+        function initializeArray() {
+            myViewFinderArray.push(new ViewFinder("World Peace", 'image1.jpg', 'An expression of world peace and a perfect world. Through symbols, images and expressing them through my art. I realize our world will never be perfect .', 'Nancy L Jolicoeur', '2012'));
+            myViewFinderArray.push(new ViewFinder("Hands of Diversity", 'image2.jpg', 'A circle of diverse hands—different skin tones, ages, and backgrounds. These hands, symbolizing unity and collaboration. Each hand holds a different tool: a gavel for justice, a pen for policy change, and a megaphone for advocacy.', 'Gene CoPilot', '2024'));
+            myViewFinderArray.push(new ViewFinder("Scales of Equilibrium", 'image3.jpg', 'A pair of golden scales. They balance perfectly, representing fairness. On one side, we place symbols of privilege (a diploma, a dollar sign, a key to opportunity). On the other side, we place symbols of struggle (a broken chain, a crumpled resume, an empty plate). The scales remain level, signifying equilibrium.', 'Al Pilot', '2023'));
+            myViewFinderArray.push(new ViewFinder("Bridge of Empathy", 'image4.jpg', 'A bridge emerges. It connects two cliffs—one labeled “Privilege” and the other “Marginalization.” People walk across this bridge, carrying empathy as their lantern. They listen, learn, and extend a helping hand to those on the other side.', 'Copilot AI', '2023'));
+            myViewFinderArray.push(new ViewFinder("Sunrise of Hope", 'image5.jpg', 'Rays of hope pierce through the clouds, illuminating a better future. The sun\’s warmth touches every figure, reminding us that progress is possible.', 'Generated AI', '2024'));
+            displayRandomImage();
+        }
+
+        // This function gets an object from the array and puts its information into the elements
+        function displayRandomImage() {
+            var randomNumber = Math.floor(Math.random() * myViewFinderArray.length);
+            var randomObject = myViewFinderArray[randomNumber];
+
+            // Update the content of the elements
+            document.getElementById("displayedImage").src = randomObject.getImage();
+            document.getElementById("title").innerHTML = `<h1>Title:</h1> ${randomObject.getTitle()}`;
+            document.getElementById("description").innerHTML = `<h1>Description:</h1> ${randomObject.getDescription()}`;
+            document.getElementById("author").innerHTML = `<h1>Author:</h1> ${randomObject.getAuthor()}`;
+            document.getElementById("year").innerHTML = `<h1>Year:</h1> ${randomObject.getYear()}`;
+        }
+
+        // Call initializeArray to populate your array with ViewFinder objects
+        initializeArray();
+    </script>
+</body>
+</html>
