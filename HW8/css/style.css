@@ -1,0 +1,76 @@
+#title{
+    font-size: 72pt;
+    margin-left: 6in;
+    margin-top: .05in;
+}
+
+img { 
+    width: 2050px;
+    height: 1050px;
+}
+
+button {
+    margin-left: 21.8in;
+    margin-top: -10.5in;
+    width: 400px;
+    height: 80px;
+    font-size: 42pt;
+}
+#description {
+    font-size: 30pt;
+    margin-left: 22in;
+    margin-top: -8in;
+    
+}
+
+#rectangle {
+    background:rgb(43, 187, 7);
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 400;
+    top: 0;
+}
+
+#circle2 {
+    background: blue;
+    border-radius:50%;
+    left: 600;
+    top: 200;
+}
+#circle3 {
+    background: purple;
+    border-radius:50%;
+    left: 800;
+    top: 400;
+}
+
+#circle2, #circle3 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+  }
+
+@media (min-width: 30em) {
+    html {
+      font-size: 125%;
+    }
+  }
+  
+  @media (min-width: 40em) {
+    html {
+      font-size: 150%;
+    }
+  }
+  
+  @media (min-width: 50em) {
+    html {
+      font-size: 175%;
+    }
+  }
+  
+  @media (min-width: 60em) {
+    html {
+      font-size: 200%;
+    }
+  }
