@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies From Wikipedia</title>
+    <script src="libs/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="styles\slinky-4.2.1\styles.css">
+    <link rel="stylesheet" href="styles\slinky-4.2.1\dist\slinky.min.css">
+    <script src="styles\slinky-4.2.1\dist\slinky.min.js"></script> 
+    <script src="scripts/jsonajax.js"></script>
+</head>
+
+<h2><u>Movies by Wikipedia</u></h2>
+
+<body>
+    <div id="movieInformation"></div>
+    <br>
+    <button id="btnSubmit">Show Info for all 10,000 Movies</button>
+    <br>
+
+    <nav id="myMenu">
+        <a href="#" data-sort="title">Top 100 by Title</a>
+        <a href="#" data-sort="year">Top 100 Oldest Films</a>
+        <a href="#" data-sort="cast">Top 100 in order by Cast</a>
+        <a href="#" data-sort="genres">Top 100 in order by Genre</a>
+    </nav>
+
+    <script>
+        $(document).ready(function() {
+            $('#myMenu').slinky({
+                resize: true,
+                title: 'Menu',
+                speed: 300,
+                easing: 'easeInOutCubic',
+                activeMenu: 'active',
+                nested: false
+            });
+        });
+    </script>
+</body>
+
+</html>
