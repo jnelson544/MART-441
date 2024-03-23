@@ -8,9 +8,9 @@ organized instead of simply displaying all the empty arrays.
 */
 $(document).ready(function () {
     $("#btnSubmit").click(function () {
-        // Load movie data when the button is clicked
+        // Load movie data
         $.getJSON("data/movie.json", function(data) {
-            var movies = data; // Assuming data is an array of movies
+            var movies = data; 
             var movieInfo = "";
             $.each(movies, function(index, movie) {
                 movieInfo += "<div>";
@@ -29,17 +29,17 @@ $(document).ready(function () {
         });
     });
 
-    // Function to sort movie data and display only the first 10 items
+    // sort movie data
     function sortAndDisplayTop10(attribute) {
         $.getJSON("data/movie.json", function (data) {
             var filteredData = data.filter(movie => movie[attribute] !== null && movie[attribute].length !== 0);
             filteredData.sort((a, b) => a[attribute] > b[attribute] ? 1 : -1);
-            var top10 = filteredData.slice(0, 100); // Extract the first 10 items
+            var top10 = filteredData.slice(0, 100); 
             displayMovieData(top10);
         });
     }
 
-    // Function to display movie data
+    // display movie data
     function displayMovieData(movies) {
         var movieInfo = "";
         $.each(movies, function (index, movie) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
         $("#movieInformation").html(movieInfo);
     }
 
-    // Event listener for menu item clicks
+    // Event listener for menu item clicks - did some research for this
     $('#myMenu a').click(function (e) {
         e.preventDefault(); // Prevent default link behavior
         var sortAttribute = $(this).data('sort'); // Get the sorting attribute from data-sort attribute
