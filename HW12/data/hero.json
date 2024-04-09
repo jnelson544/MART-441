@@ -1,0 +1,77 @@
+{
+    "superheroes":[
+        {
+            "name": "Batman",
+            "secretIdentity": "Bruce Wayne",
+            "powers": ["billionaire", "genius", "utility belt"],
+            "outfit": ["cowl", "bodysuit", "utility belt", "cape"],
+            "color": "black",  
+            "size": "32",
+            "x": "52",
+            "y": "52",
+            "w": "262",
+            "h": "362"
+            
+            
+        },
+        {
+            "name": "Superman",
+            "secretIdentity": "Clark Kent",
+            "powers": ["super strength", "flight", "heat vision", "invulnerability", "freezing breath"],
+            "outfit": ["bodysuit","cape"],
+            "color": "blue",
+            "size": "35",
+            "x": "1345",
+            "y": "170",
+            "w": "255",
+            "h": "255"
+        },
+        {
+            "name": "Wonder Woman",
+            "secretIdentity": "Diana Price",
+            "powers": ["super strength", "lasso of truth", "flight", "braclets of submission"],
+            "outfit": ["Amazonian armor", "bustier", "shorts", "tiara", "braclets"],
+            "color": "gold",
+            "size": "15",
+            "x": "505",
+            "y": "305",
+            "w": "455",
+            "h": "235"
+        },
+        {
+            "name": "The Flash",
+            "secretIdentity": "Barry Allen",
+            "powers": ["super speed", "time travel", "vibration"],
+            "outfit": ["bodysuit", "boots"],
+            "color": "red",
+            "size": "12",
+            "x": "52",
+            "y": "922",
+            "w": "272",
+            "h": "532" 
+        },
+        {
+            "name": "Aquaman",
+            "secretIdentity": "Arthur Curry",
+            "powers": ["Atlantean physiology", "water manipulation"],
+            "outfit": ["Atlantean armor", "boots"],
+            "color": "green" ,
+            "size": "25",
+            "x": "1250",
+            "y": "800",
+            "w": "255",
+            "h": "425"
+        },
+        {
+            "name": "Cyborg",
+            "secretIdentity": "Victor Stone",
+            "powers": ["technopathy", "enhanced strength"],
+            "outfit": ["mechanical components", "eye", "metallic limbs"],
+            "color": "silver",
+            "size": "28",
+            "x": "658",
+            "y": "1008",
+            "w": "258",
+            "h": "258"        }
+    ]
+}

@@ -1,0 +1,14 @@
+#myCanvas{
+    border-image:linear-gradient(#d7087d, #4702da) 50;
+    border-style:solid;
+    border-width: 5px;
+}
+
+p {
+    text-align: left;
+    margin: 0px;
+}
+
+#myStatus {
+    margin: 0px;
+}
