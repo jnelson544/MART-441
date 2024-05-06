@@ -1,0 +1,326 @@
+
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Adventures of StormLord</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 300 },
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var player;
+    var mines;
+    var rocks;
+    var platforms;
+    var cursors; 
+    var diamonds;
+    var tomatoes;
+    var gameOver = false;
+    var totalScore = 0;
+    var tomText;
+    var introText;
+    
+    
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('sky', 'assets/background.png');
+        this.load.image('ground', 'assets/greenLeft.png');
+        this.load.image('ground1', 'assets/greenMid.png');
+        this.load.image('ground2', 'assets/greenRight.png');
+        this.load.image('diamond', 'assets/diamond.png');
+        this.load.image('mine', 'assets/bomb.png');
+        this.load.image('rocks', 'assets/rocks.png');
+        this.load.image('tomato', 'assets/tomato.png');
+        this.load.spritesheet('dude', 'assets/stormlord-dragon96x64.png', { frameWidth: 96, frameHeight: 64 }); //pixels wide and high
+    }
+
+    function create ()
+    {
+        this.add.image(400, 300, 'sky');
+
+        platforms = this.physics.add.staticGroup();
+        
+        //first platform
+        platforms.create(40, 568, 'ground').setScale(.4).refreshBody();
+        platforms.create(90, 568, 'ground1').setScale(.4).refreshBody();
+        platforms.create(140, 568, 'ground2').setScale(.4).refreshBody();
+
+        //second platform
+        platforms.create(170, 450, 'ground').setScale(.4).refreshBody();
+        platforms.create(200, 450, 'ground2').setScale(.4).refreshBody();
+
+        //third platform
+        platforms.create(250, 320, 'ground').setScale(.4).refreshBody();
+        platforms.create(280, 320, 'ground1').setScale(.4).refreshBody();
+        platforms.create(320, 320, 'ground2').setScale(.4).refreshBody();
+
+        //fourth platform
+        platforms.create(150, 180, 'ground').setScale(.4).refreshBody();
+        platforms.create(180, 180, 'ground2').setScale(.4).refreshBody();
+
+        //fifth platform
+        platforms.create(420, 420, 'ground').setScale(.4).refreshBody();
+        platforms.create(450, 420, 'ground1').setScale(.4).refreshBody();
+        platforms.create(470, 420, 'ground2').setScale(.4).refreshBody();
+
+        //sixth platform
+        platforms.create(380, 100, 'ground').setScale(.4).refreshBody();
+        platforms.create(410, 100, 'ground2').setScale(.4).refreshBody();
+
+        //seventh platform
+        platforms.create(500, 250, 'ground').setScale(.4).refreshBody();
+        platforms.create(520, 250, 'ground1').setScale(.4).refreshBody();
+        platforms.create(550, 250, 'ground2').setScale(.4).refreshBody();
+
+        //eighth platform
+        platforms.create(20, 288, 'ground').setScale(.4).refreshBody();
+        platforms.create(30, 288, 'ground2').setScale(.4).refreshBody();
+
+        //nineth platform
+        platforms.create(620, 518, 'ground').setScale(.4).refreshBody();
+        platforms.create(640, 518, 'ground2').setScale(.4).refreshBody();
+        
+        //tenth platform
+        platforms.create(710, 95, 'ground').setScale(.4).refreshBody();
+        platforms.create(715, 95, 'ground2').setScale(.4).refreshBody();
+
+        //escape platform
+        platforms.create(410, 595, 'ground').setScale(.4).refreshBody();
+        platforms.create(445, 595, 'ground2').setScale(.4).refreshBody();
+
+        //final platform
+        platforms.create(710, 370, 'ground').setScale(.4).refreshBody();
+        platforms.create(740, 370, 'ground1').setScale(.4).refreshBody();
+        platforms.create(780, 370, 'ground2').setScale(.4).refreshBody();
+        
+        player = this.physics.add.sprite(35, 450, 'dude');
+
+        introText = this.add.text(16, 16, 'Collect the diamonds to win!', {fontSize: '22px', fill: '#000'});
+        totalText = this.add.text(16, 56, 'Score: 0', { fontSize: '22px', fill: '#000' });
+        tomText = this.add.text(90, 156, '', { fontSize: '100px', fill: '#000' });
+
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { diamondt: 6, end: 12 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'turn',
+            frames: [ { key: 'dude', frame: 5 } ],
+            frameRate: 20
+        });
+
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { diamondt: 0, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        cursors = this.input.keyboard.createCursorKeys();
+
+        diamonds = this.physics.add.group({
+            key: 'diamond',
+            repeat: 6,
+            setXY: { x: 100, y: 0, stepX: 100 }
+        });
+
+        diamonds.children.iterate(function (child) {
+            child.setBounceY(Phaser.Math.FloatBetween(0.5, 0.9));
+            child.body.gravity.y=100;
+        });
+
+        mines = this.physics.add.group();
+        rocks = this.physics.add.group();
+
+        rocks.create(445, 390, 'rocks').setScale(.17).refreshBody;
+        rocks.create(750, 300, 'rocks').setScale(.2).refreshBody;
+        rocks.create(-30, 200, 'rocks').setScale(.2);
+
+        tomatoes = this.physics.add.group({
+            key: 'tomato',
+            repeat: 2,
+            setXY: { x: 50, y: 50, stepX: 250 }
+        });
+
+
+
+        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(diamonds, platforms);
+        this.physics.add.collider(mines, platforms);
+        this.physics.add.collider(rocks, platforms);
+        this.physics.add.collider(tomatoes, platforms);
+ 
+
+        this.physics.add.overlap(player, diamonds, collectdiamond, null, this);
+        this.physics.add.overlap(player, tomatoes, collectToms, null, this);
+        this.physics.add.collider(player, mines, hitmine, null, this);
+        this.physics.add.collider(player, rocks, hitRocks, null, this);
+
+        playerDies = playerDies.bind(this);
+        winner = winner.bind(this);
+    }
+
+    function update ()
+    {
+        
+        
+        if (gameOver){
+            return;
+        }
+        if (
+            player.x < -20 ||
+            player.x > 820 ||
+            player.y < -40 ||
+            player.y > 620
+        ) {
+            playerDies(); 
+        }
+        if (cursors.left.isDown)
+        {
+            player.setVelocityX(-160);
+            player.anims.play('left', true);
+        }
+        else if (cursors.right.isDown)
+        {
+            player.setVelocityX(160);
+            player.anims.play('right', true);
+        }
+        else{
+            player.setVelocityX(0);
+            player.anims.play('turn');
+        }
+
+        if (cursors.space.isDown && player.body.touching.down)
+        {
+            player.setVelocityY(-330);
+        }
+
+        
+    
+    }
+
+    function collectdiamond (player, diamond)
+    {
+        diamond.disableBody(true, true);
+        totalScore += 10;
+        totalText.setText('Score: ' + totalScore);
+
+        if(totalScore >= 100){
+                winner();
+        }
+
+        if (diamonds.countActive(true) === 0)
+        {
+            diamonds.children.iterate(function (child)
+            {
+                child.enableBody(true, child.x, 0, true, true);
+            });
+
+            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+            var mine = mines.create(x, 16, 'mine');
+            mine.setBounce(1);
+            mine.setCollideWorldBounds(true);
+            mine.setVelocity(Phaser.Math.Between(-200, 200), 20);
+            mine.allowGravity = false;
+            }
+        }
+    
+
+    function collectToms (player, tomato)
+    {
+        tomato.disableBody(true, true);
+        totalScore += 5;
+        totalText.setText('Score: ' + totalScore);
+
+        if(totalScore >= 100){
+                winner();
+        }
+
+        if (tomatoes.countActive(true) === 0)
+        {
+            tomatoes.children.iterate(function (child) 
+            {
+                child.enableBody(true, child.x, 0, true, true);
+            });
+
+            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+            var mine = mines.create(x, 16, 'mine');
+            mine.setBounce(1);
+            mine.setCollideWorldBounds(true);
+            mine.setVelocity(Phaser.Math.Between(-200, 200), 20);
+            mine.allowGravity = false;
+            }
+        }
+    
+
+    function hitmine (player, mine)
+    {
+        tomText.setText('Game Over!');
+        this.physics.pause();
+        player.setTint(0xff0000);
+        player.anims.play('turn');
+        gameOver = true;
+    }
+
+
+    function hitRocks (player, rocks)
+    {
+        tomText.setText('Game Over!');
+        player.disableBody(true, true);
+        this.physics.pause();
+        gameOver = true;
+    }
+
+    function playerDies() 
+    {
+        tomText.setText('Game Over!');
+        this.physics.pause();
+        player.setTint(0xff0000);
+        player.anims.play('turn');
+        gameOver = true;
+    }
+
+    function winner() 
+    {
+        tomText.setText('WINNER!');
+        this.physics.pause();
+        player.setTint(0X003BE5);
+        player.anims.play('turn');
+        gameOver = true;
+    }
+
+
+</script>
+
+</body>
+</html>
